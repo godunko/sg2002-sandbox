@@ -1,0 +1,16 @@
+name = "sg2002_sandbox"
+description = "MILK-V Duo 256M/SG2002"
+version = "0.1.0-dev"
+
+authors = ["Vadim Godunko"]
+maintainers = ["Vadim Godunko <vgodunko@gmail.com>"]
+maintainers-logins = ["godunko"]
+licenses = "Apache-2.0 WITH LLVM-exception"
+website = ""
+tags = []
+
+#executables = ["a0b_sg2002"]
+project-files = ["gnat/sg2002.gpr"]
+
+[[depends-on]]
+gnat_riscv64_elf = "^14.1.3"
