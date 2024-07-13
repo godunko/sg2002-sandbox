@@ -1,23 +1,36 @@
-with "../config/a0b_sg2002_config.gpr";
+with "../config/sg2002_sandbox_config.gpr";
 
 project Sg2002 is
 
    for Target use "riscv64-elf";
    for Runtime ("Ada") use "light-rv64imafdc";
 
+   for Languages use ("Ada", "Asm");
+
    for Source_Dirs use ("../source/");
-   for Object_Dir use "../.objs/" & A0b_Sg2002_Config.Build_Profile;
+   for Object_Dir use "../.objs/" & Sg2002_Sandbox_Config.Build_Profile;
    for Create_Missing_Dirs use "True";
    for Exec_Dir use "../bin";
-   for Main use ("bl.adb");
+   for Main use ("bl2_main.adb");
+
+   package Builder is
+      for Executable ("bl2_main.adb") use "bl2.elf";
+   end Builder;
 
    package Compiler is
-      for Default_Switches ("Ada") use A0b_Sg2002_Config.Ada_Compiler_Switches;
+      for Default_Switches ("Ada") use Sg2002_Sandbox_Config.Ada_Compiler_Switches & ("-O2");
    end Compiler;
 
    package Binder is
       for Switches ("Ada") use ("-Es"); --  Symbolic traceback
    end Binder;
+
+   package Linker is
+      for Switches ("Ada") use
+        (
+         "-L", Project'Project_Dir & "../source",
+         "-T", "bl2.ld");
+   end Linker;
 
    package Install is
       for Artifacts (".") use ("share");
