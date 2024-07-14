@@ -5,8 +5,6 @@ with Console; use Console;
 
 procedure BL2_Main is
 begin
-   --  RBR_THR_DLL.RBR_THR_DLL := Character'Pos ('@');
-
    New_Line;
    New_Line;
    Put_Line ("--------------------");
