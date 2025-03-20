@@ -1,17 +1,18 @@
 OUTPUT_FORMAT("elf64-littleriscv")
 OUTPUT_ARCH(riscv)
-ENTRY(bl2_entrypoint)
+/* ENTRY(bl2_entrypoint) */
+ENTRY(_start)
 MEMORY {
-    RAM (rwx): ORIGIN = (0x0C000000), LENGTH = (0x37000)
+    RAM (rwx): ORIGIN = (0x8FE00000), LENGTH = (0x37000)
 }
 SECTIONS
 {
-    . = (0x0C000000);
+    . = (0x8FE00000);
     ASSERT(. == ALIGN(4096),
            "BL2_BASE address is not aligned on a page boundary.")
     ro . : {
         __RO_START__ = .;
-        *bl2_entrypoint.o(.text*)
+/*        *bl2_entrypoint.o(.text*) */
         *(.vectors)
         *(.text*)
         *(.rodata*)
@@ -41,7 +42,7 @@ SECTIONS
     } >RAM
     __BL2_END__ = .;
     __BSS_SIZE__ = SIZEOF(.bss);
-    ASSERT(. <= ((0x0C000000) + (0x37000)), "BL2 image has exceeded its limit.")
+    ASSERT(. <= ((0x8FE00000) + (0x37000)), "BL2 image has exceeded its limit.")
 p_rom_api_cryptodma_aes_decrypt = 0x0000000004418100;
 p_rom_api_flash_init = 0x0000000004418080;
 p_rom_api_get_boot_src = 0x0000000004418020;

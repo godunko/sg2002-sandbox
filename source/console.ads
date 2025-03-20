@@ -3,6 +3,8 @@ pragma Restrictions (No_Elaboration_Code);
 
 package Console is
 
+   procedure Initialize;
+
    procedure Put (Item : Character);
 
    procedure Put (Item : String);

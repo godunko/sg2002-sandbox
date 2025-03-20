@@ -18,7 +18,7 @@ project Sg2002 is
    end Builder;
 
    package Compiler is
-      for Default_Switches ("Ada") use Sg2002_Sandbox_Config.Ada_Compiler_Switches & ("-O2");
+      for Default_Switches ("Ada") use Sg2002_Sandbox_Config.Ada_Compiler_Switches & ("-O2", "-mcmodel=medany");
    end Compiler;
 
    package Binder is
